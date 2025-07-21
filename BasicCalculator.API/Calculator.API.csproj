@@ -2,8 +2,8 @@
 
   <PropertyGroup>
   <!-- <AssemblyName>Calculator.API</AssemblyName> -->
-  <AssemblyName>Calculator.API</AssemblyName>
-  <RootNamespace>Calculator.API</RootNamespace>
+  <AssemblyName>BasicCalculator.API</AssemblyName>
+  <RootNamespace>BasicCalculator.API</RootNamespace>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>

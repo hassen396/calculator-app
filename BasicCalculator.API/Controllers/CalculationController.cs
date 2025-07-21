@@ -1,7 +1,7 @@
 using Dangl.Calculator;
 using Microsoft.AspNetCore.Mvc;
 //made this namespace as Calculators because it will cause with the thired party libraty(Dangl.Calculator)
-namespace Calculators.API.Controllers
+namespace BasicCalculator.API.Controllers
 {
     public class CalculationController : ControllerBase
     {

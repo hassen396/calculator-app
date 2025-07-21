@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
-namespace UnitConversion.API.Controllers
+namespace BasicCalculator.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
