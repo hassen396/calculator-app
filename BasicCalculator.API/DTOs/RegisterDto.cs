@@ -4,7 +4,7 @@ namespace BasicCalculator.API.DTOs
 {
     public class RegisterDto
     {
-        [DataType("Email")]
+        [EmailAddress]
         public required string Email { get; set; }
 
         [DataType(DataType.Password)]

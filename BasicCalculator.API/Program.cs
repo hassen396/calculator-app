@@ -1,4 +1,8 @@
 using System.Text;
+using BasicCalculator.API.Data;
+using BasicCalculator.API.Models;
+using Calculators.API.Infrastructure;
+using Calculators.API.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,16 +15,28 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 // builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 
 //configure database connection
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-.AddEntityFrameworkStores<ApplicationDbContext>()
-.AddDefaultTokenProviders();
+// builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+// .AddEntityFrameworkStores<ApplicationDbContext>()
+// .AddDefaultTokenProviders();
 
-
+builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(options =>
+       {
+           options.Password.RequireDigit = false;
+           options.Password.RequireLowercase = false;
+           options.Password.RequireUppercase = false;
+           options.Password.RequireNonAlphanumeric = false; // disables special characters
+           options.Password.RequiredLength = 1; // minimum password length
+           options.Password.RequiredUniqueChars = 0; // number of unique characters required
+       })
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
 //Add JWT authentication configuration
 builder.Services.AddAuthentication(options =>
 {

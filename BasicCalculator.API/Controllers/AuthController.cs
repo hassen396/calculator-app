@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using BasicCalculator.API.DTOs;
+using BasicCalculator.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,12 +13,12 @@ using Microsoft.IdentityModel.Tokens;
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly SignInManager<IdentityUser> _signInManager;
+    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly IConfiguration _config;
     // private readonly TokenService _tokenService;
 
-    public AuthController(UserManager<IdentityUser> userManager, IConfiguration config, SignInManager<IdentityUser> signInManager)
+    public AuthController(UserManager<ApplicationUser> userManager, IConfiguration config, SignInManager<ApplicationUser> signInManager)
     {
         _userManager = userManager;
         _config = config;
@@ -28,7 +29,7 @@ public class AuthController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterDto dto)
     {
-        var user = new IdentityUser
+        var user = new ApplicationUser
         {
             UserName = dto.Email,
             Email = dto.Email,
@@ -55,18 +56,7 @@ public class AuthController : ControllerBase
         return Ok(new { token });
     }
 
-    // [HttpPost("login")]
-    // public async Task<IActionResult> Login([FromBody] LoginDto dto)
-    // {
-    //     var user = await _userManager.FindByEmailAsync(dto.Email);
-    //     if (user == null || !await _userManager.CheckPasswordAsync(user, dto.Password))
-    //         return Unauthorized("invalid credential");
-
-    //     var token = GenerateJwtToken(user);
-    //     return Ok(new { token });
-    // }
-
-        private string GenerateJwtToken(IdentityUser user)
+    private string GenerateJwtToken(ApplicationUser user)
     {
         var issuer = _config["Jwt:Issuer"]!;
         var audience = _config["Jwt:Audience"]!;
@@ -75,11 +65,9 @@ public class AuthController : ControllerBase
 
         var claims = new[]
         {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Email!),
+            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            new Claim(ClaimTypes.NameIdentifier, user.Id),
-            new Claim(JwtRegisteredClaimNames.Iss, issuer),
-            new Claim(JwtRegisteredClaimNames.Aud, audience)
+            new Claim(ClaimTypes.Email, user.Email!),
         };
 
         var token = new JwtSecurityToken(
@@ -101,7 +89,4 @@ public class AuthController : ControllerBase
     {
         return "secured data";
     }
-
-
-
 }
