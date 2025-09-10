@@ -16,14 +16,12 @@ public class AuthController : ControllerBase
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly IConfiguration _config;
-    // private readonly TokenService _tokenService;
 
     public AuthController(UserManager<ApplicationUser> userManager, IConfiguration config, SignInManager<ApplicationUser> signInManager)
     {
         _userManager = userManager;
         _config = config;
         _signInManager = signInManager;
-        // _tokenService = tokenService;
     }
 
     [HttpPost("register")]

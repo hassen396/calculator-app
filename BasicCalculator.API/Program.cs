@@ -17,10 +17,21 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+// Add CORS policy to allow all requests
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 
 //configure database connection
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
 // builder.Services.AddIdentity<IdentityUser, IdentityRole>()
 // .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -106,7 +117,10 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
-app.UseAuthentication(); // 🔐 Must be before Authorization
+// Use CORS policy to allow all requests
+app.UseCors("AllowAll");
+
+app.UseAuthentication(); 
 app.UseAuthorization();
 
 
