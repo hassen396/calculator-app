@@ -81,10 +81,11 @@ public class AuthController : ControllerBase
 
 
 
-    [Authorize]
+    // [Authorize]
     [HttpGet("secured-data")]
-    public string GetData()
+    public object GetData()
     {
-        return "secured data";
+        var data = "some data";
+        return new { data };
     }
 }

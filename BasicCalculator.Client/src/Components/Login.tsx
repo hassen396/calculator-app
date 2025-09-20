@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 interface LoginRespose {
   token: string;
   refreshToken: string;
@@ -15,21 +15,24 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setLoading(true);
-
     try {
       const response = await axios.post<LoginRespose>(
         "https://localhost:5296/api/Auth/login",
         { email, password }
       );
       localStorage.setItem("token", response.data.token);
-      console.log("succeed", response, data);
-    } catch (err: any) {
+      console.log("succeed", response, response.data);
+      navigate("/");
+    } catch (err:any) {
       setError(err.respose?.data?.message || "failed");
+      console.log("error here!");
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -52,7 +55,7 @@ export default function Login() {
               Email address
             </label>
             <input
-              type="password"
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               name="username"
