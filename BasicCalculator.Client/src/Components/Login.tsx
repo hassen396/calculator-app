@@ -31,7 +31,6 @@ export default function Login() {
       navigate("/");
     } catch (err:any) {
       setError(err.respose?.data?.message || "failed");
-      console.log("error here!");
       console.log(error);
     } finally {
       setLoading(false);
@@ -39,7 +38,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col justify-center gap-5 text-left w-100">
+    <div className="flex flex-col justify-center gap-5 text-left w-100 mt-3/5 h-full">
       <div className="text-center">
         <img
           className="inline-block sm:min-w-30 w-20 "

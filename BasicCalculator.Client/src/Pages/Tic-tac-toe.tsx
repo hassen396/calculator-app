@@ -24,19 +24,19 @@ export default function Game() {
     );
   });
 
-  function jumpTo(nextMove) {
+  function jumpTo(nextMove: number) {
     setCurrentMove(nextMove);
     // setXIsNext(nextMove % 2 === 0);
   }
 
-  function handlePlay(nextSquares) {
+  function handlePlay(nextSquares: string[]) {
     const nextHistory = [...history.slice(0,currentMove + 1), nextSquares]
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
     // setXIsNext(!xIsNext);
   }
   return (
-    <div className="flex gap-12">
+    <div className="flex gap-12 justify-center items-start mt-30">
       <Board squares={currentSquares} xIsNext={xIsNext} onPlay={handlePlay} />
       <div className="">
         <h1>History</h1>

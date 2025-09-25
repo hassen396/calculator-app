@@ -21,7 +21,7 @@ export function Board({xIsNext, onPlay, squares}: BoardProps) {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col justify-center-safe">
       <h1 className="mb-5">{status}</h1>
       <div className="flex">
         <Square value={squares[0]} updateValue={() => handleClick(0)} />
@@ -44,6 +44,6 @@ export function Board({xIsNext, onPlay, squares}: BoardProps) {
 
 type BoardProps = {
 xIsNext: boolean,
-onPlay: ()=> void,
-squares:(string| null)[]
+onPlay: (nextSquares: string[])=> void,
+squares:(string)[]
 }
