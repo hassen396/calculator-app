@@ -6,7 +6,7 @@ export default function Square({
   updateValue: () => void;
 }) {
   return (
-    <button onClick={updateValue} className="w-22 h-22 border-amber-500">
+    <button onClick={updateValue} className="w-22 h-22 border border-amber-500">
       {value}
     </button>
   );

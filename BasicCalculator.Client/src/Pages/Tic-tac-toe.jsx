@@ -24,12 +24,12 @@ export default function Game() {
     );
   });
 
-  function jumpTo(nextMove: number) {
+  function jumpTo(nextMove) {
     setCurrentMove(nextMove);
     // setXIsNext(nextMove % 2 === 0);
   }
 
-  function handlePlay(nextSquares: string[]) {
+  function handlePlay(nextSquares) {
     const nextHistory = [...history.slice(0,currentMove + 1), nextSquares]
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);

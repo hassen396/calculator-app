@@ -1,23 +1,16 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-interface LoginRespose {
-  token: string;
-  refreshToken: string;
-  user: {
-    id: string;
-    email: string;
-  };
-}
+
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setError(null);
     setLoading(true);
@@ -29,7 +22,7 @@ export default function Login() {
       localStorage.setItem("token", response.data.token);
       console.log("succeed", response, response.data);
       navigate("/");
-    } catch (err:any) {
+    } catch (err) {
       setError(err.respose?.data?.message || "failed");
       console.log(error);
     } finally {
@@ -77,7 +70,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="text-purple-500 hover:text-blue-50 hover:bg-amber-600 border-purple-200 border-8 p-24"
+              className="text-purple-500 hover:text-blue-50 hover:bg-amber-600 border-purple-200 border-2 px-5 py-1.5 rounded-2xl"
             >
               {loading ? "Logging in..." : "Login"}
             </button>

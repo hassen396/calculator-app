@@ -1,14 +1,14 @@
 import Square from "../Components/Square";
 import calculateWinner  from "./calculateWinner";
 
-export function Board({xIsNext, onPlay, squares}: BoardProps) {
+export function Board({xIsNext, onPlay, squares}) {
 
   const winner = calculateWinner(squares);
   const status = winner
     ? `Winner ${winner}`
     : "Next Player " + (xIsNext ? "X" : "O");
 
-  function handleClick(i: number) {
+  function handleClick(i) {
     if (squares[i] || calculateWinner(squares)) return;
     const nextSquares = squares.slice();
 
@@ -42,8 +42,3 @@ export function Board({xIsNext, onPlay, squares}: BoardProps) {
   );
 }
 
-type BoardProps = {
-xIsNext: boolean,
-onPlay: (nextSquares: string[])=> void,
-squares:(string)[]
-}

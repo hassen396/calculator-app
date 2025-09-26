@@ -1,5 +1,5 @@
 
-export default function calculatemWinner(squares:(string|null)[]) {
+export default function calculatemWinner(squares) {
     if(!squares)
         return console.log("squares at calcsq ", squares )
   const lines = [

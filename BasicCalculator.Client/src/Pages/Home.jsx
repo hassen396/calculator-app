@@ -4,7 +4,7 @@ export default function Home() {
   const [input, setInput] = useState("");
 
   // Handle button clicks
-  const handleButtonClick = (value: string) => {
+  const handleButtonClick = (value) => {
     if (value === "C") {
       setInput(""); // Clear
     } else if (value === "=") {
@@ -22,7 +22,7 @@ export default function Home() {
   };
 
   // Handle keyboard input
-  const handleKeyDown = (e: KeyboardEvent) => {
+  const handleKeyDown = (e) => {
     const allowedKeys = "0123456789+-*/()";
     if (allowedKeys.includes(e.key)) {
       setInput((prev) => prev + e.key);
@@ -68,7 +68,7 @@ export default function Home() {
         {buttons.map((btn) => (
           <button
             key={btn}
-            className="bg-gray-700 text-white text-2xl py-4 hover:bg-gray-600 transition"
+            className="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-4 rounded-lg shadow active:scale-95"
             onClick={() => handleButtonClick(btn === "x" ? "*" : btn)}
           >
             {btn}

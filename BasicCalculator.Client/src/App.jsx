@@ -15,7 +15,7 @@ function App() {
   return (
     <Router>
         <NaveBar />
-      <div className="flex flex-col w-full h-full items-center justify-center">
+      <div className="flex flex-col w-full h-full items-center justify-start">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

@@ -17,7 +17,7 @@ const navigation = [
   { name: "movies", href: "/movies", current: true },
 ];
 
-function classNames(...classes: string[]) {
+function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
