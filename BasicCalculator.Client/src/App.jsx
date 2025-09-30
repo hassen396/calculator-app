@@ -12,7 +12,7 @@ import Movies from "./Pages/Movies";
 function App() {
   return (
     <Router>
-        <NaveBar />
+        <NaveBar  />
       <div className="flex flex-col w-full min-h-screen items-center justify-start">
         <Routes>
           <Route path="/" element={<Home />} />

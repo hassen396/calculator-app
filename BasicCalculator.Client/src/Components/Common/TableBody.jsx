@@ -1,4 +1,3 @@
-// import Like from "./Like";
 import _ from "lodash";
 
 function createKey(item, column) {
