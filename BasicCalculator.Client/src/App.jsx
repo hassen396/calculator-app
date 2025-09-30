@@ -10,12 +10,10 @@ import NaveBar from "./Components/NaveBar";
 import 'font-awesome/css/font-awesome.css'
 import Movies from "./Pages/Movies";
 function App() {
-  // const [count, setCount] = useState(0)
-
   return (
     <Router>
         <NaveBar />
-      <div className="flex flex-col w-full h-full items-center justify-start">
+      <div className="flex flex-col w-full min-h-screen items-center justify-start">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

@@ -15,7 +15,7 @@ function FilterableProductTable({ products }) {
 
 function SearchBar() {
   return (
-    <form className="flex flex-col w-full h-full ">
+    <form className="flex flex-col w-full ">
       <input type="text" placeholder="search..." />
       <label>
         <input type="checkbox" />
@@ -27,7 +27,7 @@ function SearchBar() {
 }
 function ProductTable({ products }) {
   return (
-    <table className="w-full h-full">
+    <table className="w-full">
       <thead>
         <th>Name</th>
         <th>Price</th>

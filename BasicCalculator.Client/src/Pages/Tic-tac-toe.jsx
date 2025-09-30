@@ -19,7 +19,9 @@ export default function Game() {
     }
     return (
       <li key={move}>
-        <button onClick={() => jumpTo(move)}>{description}</button>
+        <button className=" active:scale-95 bg-amber-200 dark:bg-amber-950 rounded-2xl p-2.5 my-1" onClick={() => jumpTo(move)}>
+          {description}
+        </button>
       </li>
     );
   });
@@ -30,17 +32,17 @@ export default function Game() {
   }
 
   function handlePlay(nextSquares) {
-    const nextHistory = [...history.slice(0,currentMove + 1), nextSquares]
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
     // setXIsNext(!xIsNext);
   }
   return (
-    <div className="flex gap-12 justify-center items-start mt-30">
+    <div className="flex flex-col md:flex-row gap-12 justify-center items-start mt-30">
       <Board squares={currentSquares} xIsNext={xIsNext} onPlay={handlePlay} />
       <div className="">
         <h1>History</h1>
-        <ul>{moves}</ul>
+        <ul className="max-h-64 overflow-y-auto border p-2 rounded">{moves}</ul>
       </div>
     </div>
   );

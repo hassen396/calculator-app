@@ -41,7 +41,7 @@ export default function Counters() {
   }
   const totalCount = counters.filter(c => c.value>0).length;
   return (
-    <div className="flex flex-col gap-4 h-full justify-center items-center">
+    <div className="my-12 h-full flex flex-col gap-4 justify-center items-center">
       {counters.length ?
         <div>
           <button className="w-20 rounded-2xl border border-amber-300 bg-blue-500 active:scale-90" onClick={handleReset}>

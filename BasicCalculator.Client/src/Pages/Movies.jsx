@@ -1,58 +1,83 @@
-import Like from "../Components/Like";
+import Like from "../Components/Common/Like";
 import { getMovies } from "../Services/fakeMovieService";
-import { useState } from "react";
+import { getGenres } from "../Services/fakeGenreService";
+import _ from "lodash";
+import { useEffect, useState } from "react";
 import Pagination from "../Components/Pagination";
+import paginate from "../utils/paginate";
+import Filter from "../Components/filter";
+import MoviesTable from "../Components/MoviesTable";
 
 export default function Movies() {
   const [movies, setMovies] = useState(getMovies());
-  const [pageSize] = useState(3);
+  const [genres] = useState(getGenres());
+  const [selectedGenre, setSelectedItem] = useState(0);
+  const [pageSize] = useState(4);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sortColumn, setSortColumn] = useState({ path: "title", order: "asc" });
+
+  const sorted = _.orderBy(movies, [sortColumn.path], [sortColumn.order]);
+
+  const paginatedMovies = paginate(sorted, currentPage, pageSize);
   const { length: count } = movies;
-  if (count === 0) return <h1 className="text-3xl">No Movies are available</h1>;
+  const { length: currentPageMovieCount } = paginatedMovies;
+
+  useEffect(() => {
+    if (paginatedMovies.length === 0 && currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }, [paginatedMovies, currentPage]);
+  const value =
+    count === 0
+      ? "No Movies are available"
+      : `Showng ${currentPageMovieCount} of ${count} movies from the database`;
+
   return (
-    <div className="overflow-x-auto w-full">
-      <p className="text-center text-2xl">Showng {count} movies</p>
-      <table className="min-w-full border rounded-lg text-center text-2xl">
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Gener</th>
-            <th>Stock</th>
-            <th>Rate</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {movies.map((movie) => (
-            <tr key={movie._id}>
-              <td>{movie.title}</td>
-              <td>{movie.genre.name}</td>
-              <td>{movie.numberInStock}</td>
-              <td>{movie.dailyRentalRate}</td>
-              <td>
-                <Like onLike={() => hanleLike(movie)} liked={movie.liked} />
-              </td>
-              <td>
-                <button className=" cursor-pointer mx-3 px-3 my-2 rounded-lg bg-red-600 text-white hover:bg-red-700 active:scale-95" onClick={() => handleDelete(movie._id)}>
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <Pagination totalCount={movies.length} pageSize={pageSize} onPageChange={handlePageChange} currentPage={3} />
+    <div className="sm:flex gap-5 w-full">
+      <Filter onItemSelect={handleGenreSelect} items={genres} selectedItem={selectedGenre} />
+      <div className="w-full">
+        <p className="text-center text-2xl">{value}</p>
+        <MoviesTable
+          paginatedMovies={paginatedMovies}
+          onLike={handleLike}
+          onDelete={handleDelete}
+          onSort={handleSort}
+          sortColumn={sortColumn}
+        />
+        <Pagination
+          totalCount={movies.length}
+          pageSize={pageSize}
+          onPageChange={handlePageChange}
+          currentPage={currentPage}
+        />
+      </div>
     </div>
   );
   function handleDelete(_id) {
-    return setMovies(movies.filter((m) => _id !== m._id));
+    setMovies(movies.filter((m) => _id !== m._id));
   }
 
-  function hanleLike(movie) {
+  function handleLike(movie) {
     movie.liked = !movie.liked;
     const newMovies = [...movies];
     setMovies(newMovies);
   }
 
-  function handlePageChange(page) {}
+  function handlePageChange(page) {
+    setCurrentPage(page);
+  }
+
+  function handleGenreSelect(item) {
+    if (item == 0) {
+      setSelectedItem(item);
+      return setMovies(getMovies());
+    }
+    const newMovies = getMovies().filter((m) => m.genre._id == item._id);
+    setMovies(newMovies);
+    setSelectedItem(item);
+  }
+
+  function handleSort(sortCol) {
+    setSortColumn(sortCol);
+  }
 }
