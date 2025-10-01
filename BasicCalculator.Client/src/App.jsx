@@ -11,7 +11,7 @@ import 'font-awesome/css/font-awesome.css'
 import Movies from "./Pages/Movies";
 function App() {
   return (
-    <Router>
+    <div className="w-full">
         <NaveBar  />
       <div className="flex flex-col w-full min-h-screen items-center justify-start">
         <Routes>
@@ -24,7 +24,7 @@ function App() {
           <Route path="/movies" element={<Movies />}/>
         </Routes>
       </div>
-    </Router>
+    </div>
   );
 }
 

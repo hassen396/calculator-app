@@ -6,10 +6,7 @@ export default function Game() {
   const [currentMove, setCurrentMove] = useState(0);
   const currentSquares = history[currentMove];
   const xIsNext = currentMove % 2 === 0;
-  // console.log([1,2,null,null].length, "length")
-  // function handleHistory(i) {
-  //   history[i] = setHistory([]);
-  // }
+
   const moves = history.map((square, move) => {
     let description;
     if (move > 0) {
@@ -28,14 +25,12 @@ export default function Game() {
 
   function jumpTo(nextMove) {
     setCurrentMove(nextMove);
-    // setXIsNext(nextMove % 2 === 0);
   }
 
   function handlePlay(nextSquares) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
-    // setXIsNext(!xIsNext);
   }
   return (
     <div className="flex flex-col md:flex-row gap-12 justify-center items-start mt-30">

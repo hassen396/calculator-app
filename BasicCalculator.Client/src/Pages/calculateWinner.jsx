@@ -1,7 +1,7 @@
 
 export default function calculatemWinner(squares) {
     if(!squares)
-        return console.log("squares at calcsq ", squares )
+        return null;
   const lines = [
     [0, 1, 2],
     [3, 4, 5],

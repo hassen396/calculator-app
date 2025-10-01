@@ -1,4 +1,3 @@
-import Like from "../Components/Common/Like";
 import { getMovies } from "../Services/fakeMovieService";
 import { getGenres } from "../Services/fakeGenreService";
 import _ from "lodash";
@@ -33,9 +32,11 @@ export default function Movies() {
       : `Showng ${currentPageMovieCount} of ${count} movies from the database`;
 
   return (
-    <div className="sm:flex gap-5 w-full">
-      <Filter onItemSelect={handleGenreSelect} items={genres} selectedItem={selectedGenre} />
-      <div className="w-full">
+    <div className="mt-10 flex xl:flex-row flex-col gap-5 w-full">
+      <div className="xl:w-[25%] w-full">
+        <Filter onItemSelect={handleGenreSelect} items={genres} selectedItem={selectedGenre} />
+      </div>
+      <div className="w-full xl:w-[75%] overflow-x-scroll ">
         <p className="text-center text-2xl">{value}</p>
         <MoviesTable
           paginatedMovies={paginatedMovies}

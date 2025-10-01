@@ -123,7 +123,6 @@ export default function NaveBar() {
         <div className="space-y-1 px-2 pt-2 pb-3">
           {navigation.map((item) => {
           const isCurrent = location.pathname === item.href;
-            console.log(isCurrent)
             return (
               <DisclosureButton
                 key={item.name}

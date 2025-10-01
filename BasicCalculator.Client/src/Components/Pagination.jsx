@@ -36,14 +36,14 @@ export default function Pagination({ totalCount, pageSize, onPageChange, current
           onClick={() => {
             if (currentPage > 1) onPageChange(currentPage - 1);
           }}
-          className={"relative inline-flex items-center rounded-md border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium hover:bg-white/10 cursor-pointer "  + (currentPage > 1? "dark:text-gray-300 text-gray-500":"dark:text-gray-500 text-gray-300")}>
+          className={"active:scale-x-110 relative inline-flex items-center rounded-md border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium hover:bg-white/10 cursor-pointer "  + (currentPage > 1? "dark:text-gray-300 text-gray-500":"dark:text-gray-500 text-gray-300")}>
           Previous
         </a>
         <a
           onClick={() => {
             if (currentPage < pages) onPageChange(currentPage + 1);
           }}
-          className={"relative ml-3 inline-flex items-center rounded-md border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium hover:bg-white/10 cursor-pointer " + (currentPage < pages? "dark:text-gray-300 text-gray-500":"dark:text-gray-500 text-gray-300") }>
+          className={"active:scale-x-110 relative ml-3 inline-flex items-center rounded-md border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium hover:bg-white/10 cursor-pointer " + (currentPage < pages? "dark:text-gray-300 text-gray-500":"dark:text-gray-500 text-gray-300") }>
           Next
         </a>
       </div>
@@ -59,13 +59,13 @@ export default function Pagination({ totalCount, pageSize, onPageChange, current
               onClick={() => {
                 if (currentPage > 1) onPageChange(currentPage - 1);
               }}
-              className={"relative inline-flex items-center rounded-l-md px-2 py-2 inset-ring inset-ring-gray-700 hover:bg-white/5 focus:z-20 focus:outline-offset-0 " + (currentPage > 1? "dark:text-gray-300 text-gray-500 cursor-pointer":"dark:text-gray-500 text-gray-300")}>
+              className={"active:scale-x-110 relative inline-flex items-center rounded-l-md px-2 py-2 inset-ring inset-ring-gray-700 hover:bg-white/5 focus:z-20 focus:outline-offset-0 " + (currentPage > 1? "dark:text-gray-300 text-gray-500 cursor-pointer":"dark:text-gray-500 text-gray-300")}>
               <span className="sr-only">Previous</span>
               <ChevronLeftIcon aria-hidden="true" className="size-5" />
             </a>
 
             {pagesArray.map((page) => {
-              let classes = "relative z-10 inline-flex items-center  px-4 py-2 text-sm font-semibold dark:text-white focus:z-20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 inset-ring inset-ring-gray-700 cursor-pointer";
+              let classes = "active:scale-x-80 relative z-10 inline-flex items-center  px-4 py-2 text-sm font-semibold dark:text-white focus:z-20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 inset-ring inset-ring-gray-700 cursor-pointer";
               return (
                 <span key={page} onClick={() => onPageChange(page)} className={(classes = classes + (currentPage === page ? " bg-indigo-500 text-white" : ""))}>
                   {page}
@@ -77,7 +77,7 @@ export default function Pagination({ totalCount, pageSize, onPageChange, current
               onClick={() => {
                 if (currentPage < pages) onPageChange(currentPage + 1);
               }}
-              className={"relative inline-flex items-center rounded-r-md px-2 py-2 inset-ring inset-ring-gray-700 hover:bg-white/5 focus:z-20 focus:outline-offset-0 " + (currentPage < pages? "dark:text-gray-300 text-gray-500 cursor-pointer":"dark:text-gray-500 text-gray-300") }>
+              className={"relative inline-flex items-center rounded-r-md px-2 py-2 inset-ring inset-ring-gray-700 hover:bg-white/5 focus:z-20 focus:outline-offset-0 active:scale-x-110 " + (currentPage < pages? "dark:text-gray-300 text-gray-500 cursor-pointer":"dark:text-gray-500 text-gray-300") }>
               <span className="sr-only">Next</span>
               <ChevronRightIcon aria-hidden="true" className="size-5" />
             </a>

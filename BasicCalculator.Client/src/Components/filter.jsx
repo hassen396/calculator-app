@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Filter({ onItemSelect, items, selectedItem }) {
   return (
-    <div className="w-full flex items-center px-10 py-12 flex-col lg:w-1/5  sm:mb-2">
-      <div onClick={() => onItemSelect(0)} className="p-2 sm:w-full w-1/2 cursor-pointer active:scale-98">
+    <div className="w-full flex items-center justify-center px-10 py-12 flex-col   sm:mb-2">
+      <Link to="/game">play game</Link>
+      <div onClick={() => onItemSelect(0)} className="p-2 xl:w-full w-1/2  cursor-pointer active:scale-98">
         <div
           className={
             "rounded flex p-1  items-center " +
@@ -20,16 +21,14 @@ export default function Filter({ onItemSelect, items, selectedItem }) {
             <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
             <path d="M22 4L12 14.01l-3-3"></path>
           </svg>
-          <span className="font-medium">
-            All Genres
-          </span>
+          <span className="font-medium">All Genres</span>
         </div>
       </div>
       {items.map((item) => (
         <div
           onClick={() => onItemSelect(item)}
           key={item._id}
-          className=" p-2 sm:w-full w-1/2 cursor-pointer active:scale-98">
+          className=" p-2 xl:w-full w-1/2 cursor-pointer active:scale-98">
           <div
             className={
               "rounded flex p-1  items-center " +

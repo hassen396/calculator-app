@@ -1,17 +1,16 @@
 import _ from "lodash";
 
 function createKey(item, column) {
-  console.log(item, column, "keys bing made");
   return item._id + (column.path || column.key);
 }
 const renderCell = (item, col) => {
-    if(col.content) return col.content(item);
-    return  _.get(item, col.path);
+  if (col.content) return col.content(item);
+  return _.get(item, col.path);
 };
 
-const TableBody = ({ data, columns, onLike, onDelete }) => {
+const TableBody = ({ data, columns }) => {
   return (
-    <tbody className="divide-y divide-gray-200vorder">
+    <tbody className="divide-y divide-gray-200 border">
       {data.map((item) => (
         <tr key={item._id}>
           {columns.map((col) => (
