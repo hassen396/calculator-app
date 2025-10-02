@@ -20,13 +20,14 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Add CORS policy to allow all requests
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    options.AddPolicy("AllowReactApp", policy =>
     {
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("http://localhost:5173") // allow ONLY React dev server
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
 });
+
 
 
 //configure database connection
@@ -118,7 +119,7 @@ app.UseHttpsRedirection();
 app.UseRouting();
 
 // Use CORS policy to allow all requests
-app.UseCors("AllowAll");
+app.UseCors("AllowReactApp");
 
 app.UseAuthentication(); 
 app.UseAuthorization();

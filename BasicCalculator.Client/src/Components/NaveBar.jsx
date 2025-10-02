@@ -1,3 +1,6 @@
+import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useLocation, Link } from "react-router-dom";
+import pp from '../assets/profile-pic.avif'
 import {
   Disclosure,
   DisclosureButton,
@@ -7,10 +10,10 @@ import {
   MenuItem,
   MenuItems,
 } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useLocation, Link } from "react-router-dom";
+
+
 const navigation = [
-  { name: "Calculator", href: "/", current: false },
+  { name: "Home", href: "/home", current: false },
   { name: "Counters", href: "/counters", current: false },
   { name: "Game", href: "/game", current: false },
   { name: "products", href: "/products", current: false },
@@ -84,7 +87,7 @@ export default function NaveBar() {
                 <span className="sr-only">Open user menu</span>
                 <img
                   alt=""
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  src={pp}
                   className="size-8 rounded-full bg-gray-800 outline -outline-offset-1 outline-white/10"
                 />
               </MenuButton>
